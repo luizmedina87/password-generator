@@ -1,4 +1,16 @@
-// Assignment code here
+var getChars = function() {
+  // prompt user for which characters they want to use (select at least one)
+}
+
+var getSize = function() {
+  // prompt user for the length of the password (8-128)
+}
+
+var generatePassword = function() {
+  // get valid chars using getChars function
+  // get size using getSize function
+  // generate password
+}
 
 
 // Get references to the #generate element
@@ -15,3 +27,10 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+passwordChars = {
+  lower = [..."abcdefghijklmnopqrstuvwyxz"],
+  upper = [..."ABCDEFGHIJKLMNOPQRSTUVWYXZ"],
+  special = [..."!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"],
+  numeric = [..."1234567890"];
+}
