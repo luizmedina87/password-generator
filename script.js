@@ -1,14 +1,14 @@
-var getChars = function(chars) {
+var checkChars = function(lower, upper, numeric, special) {
+  // returns true if at least one is true
+  return lower || upper || numeric || special;
+}
 
+var getChars = function(options) {
   // create variables to determine which characters to use
   var includeLower, includeUpper, includeNumeric, includeSpecial;
-  includeLower = includeUpper = includeNumeric = includeSpecial = true;
-
-  // variable to check if the user selected none of the options
-  var selectedOption = false;
 
   // enter a loop that forces the user to choose at least one option
-  while (!selectedOption) {
+  while (true) {
     // get user input
     window.alert(
       "Select the characters to use in your password.\n"
@@ -16,51 +16,79 @@ var getChars = function(chars) {
     )
     includeLower = window.confirm(
       "Include lowercase characters?\n"
-      + chars.lower
+      + options.lower
     );
     includeUpper = window.confirm(
       "Include upercase characters?\n"
-      + chars.upper
+      + options.upper
     );
     includeNumeric = window.confirm(
       "Include numeric characters?\n"
-      + chars.numeric
+      + options.numeric
     );
     includeSpecial = window.confirm(
       "Include special characters?\n"
-      + chars.special
+      + options.special
     )
 
     // check if user provided at least one option
-    selectedOption = (
-      includeLower || includeUpper || includeNumeric || includeSpecial
-    );
+    if (checkChars(includeLower, includeUpper, includeNumeric, includeSpecial)) {
+      break;
+    }
   }
   
   // create a list with the selected characters to use
   var selectedChars = [];
   if (includeLower) {
-    selectedChars = selectedChars.concat([...passwordChars.lower]);
+    selectedChars = selectedChars.concat([...passwordOptions.lower]);
   }
   if (includeUpper) {
-    selectedChars = selectedChars.concat([...passwordChars.upper]);
+    selectedChars = selectedChars.concat([...passwordOptions.upper]);
   }
   if (includeNumeric) {
-    selectedChars = selectedChars.concat([...passwordChars.numeric]);
+    selectedChars = selectedChars.concat([...passwordOptions.numeric]);
   }
   if (includeSpecial) {
-    selectedChars = selectedChars.concat([...passwordChars.special]);
+    selectedChars = selectedChars.concat([...passwordOptions.special]);
   }
   
-  return selectedChars
+  return selectedChars;
 }
 
-var getSize = function() {
-  // prompt user for the length of the password (8-128)
+var checkSize = function(size) {
+  intCheck = Number.isInteger(size);
+  bottomCheck = size >= 8;
+  topCheck = size <= 128;
+  return intCheck && bottomCheck && topCheck;
 }
+
+var getSize = function(options) {
+  var size;
+  debugger;
+  while (true) {
+    size = window.prompt(
+      "Select desired password size ("
+      + options.minSize 
+      + "-" 
+      + options.maxSize 
+      + ")."
+    );
+    size = parseInt(size);
+    if (checkSize(size)) {
+      break;
+    }
+  }
+
+  return size;
+}
+
+// var generateRandInt() {
+  
+// }
 
 var generatePassword = function(chars, size) {
-  // generate password based on size and chars
+  // create empty array to receive password characters
+  // var containerArray = [...Array(size)];
 }
 
 
@@ -69,8 +97,8 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var validChars = getChars(passwordChars);
-  var passwordSize = getSize();
+  var validChars = getChars(passwordOptions);
+  var passwordSize = getSize(passwordOptions);
   var password = generatePassword(validChars, passwordSize);
   var passwordText = document.querySelector("#password");
 
@@ -81,9 +109,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-passwordChars = {
+passwordOptions = {
   lower: "abcdefghijklmnopqrstuvwyxz",
   upper: "ABCDEFGHIJKLMNOPQRSTUVWYXZ",
   numeric: "1234567890",
-  special: "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"
+  special: "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~",
+  minSize: 8,
+  maxSize: 128
 }
