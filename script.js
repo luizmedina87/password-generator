@@ -9,7 +9,6 @@ var getChars = function(chars) {
 
   // enter a loop that forces the user to choose at least one option
   while (!selectedOption) {
-    debugger;
     // get user input
     window.alert(
       "Select the characters to use in your password.\n"
@@ -37,6 +36,23 @@ var getChars = function(chars) {
       includeLower || includeUpper || includeNumeric || includeSpecial
     );
   }
+  
+  // create a list with the selected characters to use
+  var selectedChars = [];
+  if (includeLower) {
+    selectedChars = selectedChars.concat([...passwordChars.lower]);
+  }
+  if (includeUpper) {
+    selectedChars = selectedChars.concat([...passwordChars.upper]);
+  }
+  if (includeNumeric) {
+    selectedChars = selectedChars.concat([...passwordChars.numeric]);
+  }
+  if (includeSpecial) {
+    selectedChars = selectedChars.concat([...passwordChars.special]);
+  }
+  
+  return selectedChars
 }
 
 var getSize = function() {
@@ -66,8 +82,8 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 passwordChars = {
-  lower: ["abcdefghijklmnopqrstuvwyxz"],
-  upper: ["ABCDEFGHIJKLMNOPQRSTUVWYXZ"],
-  numeric: ["1234567890"],
-  special: ["!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"]
+  lower: "abcdefghijklmnopqrstuvwyxz",
+  upper: "ABCDEFGHIJKLMNOPQRSTUVWYXZ",
+  numeric: "1234567890",
+  special: "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"
 }
