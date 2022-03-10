@@ -6,10 +6,8 @@ var getSize = function() {
   // prompt user for the length of the password (8-128)
 }
 
-var generatePassword = function() {
-  // get valid chars using getChars function
-  // get size using getSize function
-  // generate password
+var generatePassword = function(chars, size) {
+  // generate password based on size and chars
 }
 
 
@@ -18,7 +16,9 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var validChars = getChars();
+  var passwordSize = getSize();
+  var password = generatePassword(validChars, passwordSize);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
