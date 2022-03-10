@@ -29,8 +29,8 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 passwordChars = {
-  lower = [..."abcdefghijklmnopqrstuvwyxz"],
-  upper = [..."ABCDEFGHIJKLMNOPQRSTUVWYXZ"],
-  special = [..."!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"],
-  numeric = [..."1234567890"];
+  lower: [..."abcdefghijklmnopqrstuvwyxz"],
+  upper: [..."ABCDEFGHIJKLMNOPQRSTUVWYXZ"],
+  special: [..."!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"],
+  numeric: [..."1234567890"]
 }
