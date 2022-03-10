@@ -64,7 +64,6 @@ var checkSize = function(size) {
 
 var getSize = function(options) {
   var size;
-  debugger;
   while (true) {
     size = window.prompt(
       "Select desired password size ("
@@ -82,13 +81,22 @@ var getSize = function(options) {
   return size;
 }
 
-// var generateRandInt() {
-  
-// }
+var generateRandItem = function(chars) {
+  var randomNumber = Math.random() * chars.length;
+  var randomIndex = Math.floor(randomNumber);
+  var randomItem = chars[randomIndex];
+  return randomItem;
+}
 
 var generatePassword = function(chars, size) {
   // create empty array to receive password characters
-  // var containerArray = [...Array(size)];
+  debugger;
+  var passwordChars = [...Array(size)];
+  for (let i = 0; i < size; i++) {
+    passwordChars[i] = generateRandItem(chars);
+  }
+  var password = passwordChars.join('');
+  return password;
 }
 
 
@@ -100,6 +108,7 @@ function writePassword() {
   var validChars = getChars(passwordOptions);
   var passwordSize = getSize(passwordOptions);
   var password = generatePassword(validChars, passwordSize);
+  console.log(passwordSize);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
