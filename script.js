@@ -114,7 +114,6 @@ var getSize = function(constraints) {
       break;
     }
   }
-
   return size;
 }
 
@@ -131,6 +130,7 @@ var generateRandItem = function(chars) {
   var randomItem = chars[randomIndex];
   return randomItem;
 }
+
 
 /**
  * Generates a random password.
@@ -154,8 +154,10 @@ var generatePassword = function(chars, size) {
   return password;
 }
 
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
+
 
 // Write password to the #password input
 function writePassword() {
@@ -166,11 +168,12 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
 
 // Contains the constraints and characters to be used to generate the
 // password
